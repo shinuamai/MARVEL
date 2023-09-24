@@ -1,0 +1,22 @@
+<h1>Personajes de Marvel</h1>
+
+<div class="character-list">
+  <div class="character-card" *ngFor="let character of characters"  (mouseenter)="mostrarTooltip()" (mouseleave)="ocultarTooltip()">
+        <img [src]="character.thumbnail.path + '.' + character.thumbnail.extension" alt="{{ character.name }}" class="character-image">
+        <div class="character-details">
+            <h2>{{ character.name }}</h2>
+            <div *ngIf="character.description; else noinfo">
+                <p>{{ character.description}}</p>
+            </div>
+            <ng-template #noinfo>
+                <p> This character does not have a specific description of his role in any content.</p>
+            </ng-template>
+        </div>
+  </div>
+</div>
+
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+  <span>Página {{ currentPage }}</span>
+  <button (click)="nextPage()">Siguiente</button>
+</div>

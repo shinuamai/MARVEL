@@ -22,17 +22,14 @@ export class CharactersComponent {
     this.loadMarvelCharacters();
   }
 
-  async loadMarvelCharacters() {
-    try {
-      this.characters = await this.dataService.getMarvelCharacters(
-        this.currentPage,
-        this.pageSize
-      );
-    } catch (error) {
-      console.log('Error:', error);
-    }
+  loadMarvelCharacters() {
+    this.dataService.getMarvelCharacters(this.currentPage, this.pageSize)
+      .subscribe(
+        (characters: MarvelCharacter[]) => {
+          this.characters = characters;
+        });
   }
-
+  
   mostrarTooltip() {
     this.tooltipVisible = true;
   }
